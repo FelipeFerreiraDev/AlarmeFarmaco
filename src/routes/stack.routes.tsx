@@ -27,15 +27,14 @@ const AppRoutes: React.FC = () => (
         />
 
         <stackRoutes.Screen
-            name="Camera"
-            component={CameraScreen}
-        />
-
-        <stackRoutes.Screen
             name="MyAlarms"
             component={MyAlarms}
         />
 
+        <stackRoutes.Screen
+            name="Camera"
+            component={CameraScreen}
+        />
     </stackRoutes.Navigator>
 )
 

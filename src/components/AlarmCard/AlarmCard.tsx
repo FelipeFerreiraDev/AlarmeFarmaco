@@ -4,7 +4,7 @@ import {
     Image,
     StyleSheet, Text, View
 } from 'react-native';
-import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
+import { RectButton, RectButtonProps, TouchableOpacity } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { Feather } from '@expo/vector-icons';
 import { SvgFromUri } from 'react-native-svg';
@@ -14,18 +14,21 @@ interface AlarmProps extends RectButtonProps {
         title: string;
         photo: string;
         hour: string;
-    }
+    };
 }
 
 export const AlarmCard = ({ data, ...rest }: AlarmProps) => {
     return (
         <RectButton style={styles.container}>
-            { data.photo != 'a' ?
+            {data.photo != 'a' ?
                 <Image
-                source={{uri: data.photo}}
-                style={{resizeMode: 'cover', width: 100,
-                height: 100,}}
-            /> : null}
+                    source={{ uri: data.photo }}
+                    style={{
+                        resizeMode: 'cover', width: 100,
+                        height: 100,
+                        borderRadius: 6
+                    }}
+                /> : null}
             <Text style={styles.title}>
                 {data.title}
             </Text>
@@ -75,13 +78,13 @@ const styles = StyleSheet.create({
     buttonRemove: {
         width: 100,
         height: 85,
-        backgroundColor: "#000",
+        backgroundColor: "#ff0000",
         marginTop: 15,
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
-        right: 20,
+        right: 10,
         paddingLeft: 15
     }
 })

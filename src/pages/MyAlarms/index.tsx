@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-import { View, StyleSheet, Image, FlatList, Text } from 'react-native';
+import { View, StyleSheet, Image, FlatList, Text, Alert } from 'react-native';
 import { Container } from './Container';
 
-import { AlarmProps, loadAlarm } from '../../libs/storage';
+import { AlarmProps, loadAlarm, removeAlarm, StorageAlarmProps } from '../../libs/storage';
 import { formatDistance } from 'date-fns';
 import { pt } from 'date-fns/locale';
 import { Title } from './Title';
 import { AlarmCard } from '../../components/AlarmCard/AlarmCard';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/core';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function MyAlarms() {
     const [myAlarms, setMyAlarms] = useState<AlarmProps[]>([]);
@@ -25,7 +26,7 @@ export function MyAlarms() {
     useEffect(() => {
         async function loadStorageData() {
             const alarmsStoraged = await loadAlarm();
-            if(alarmsStoraged.length!=0) {
+            if (alarmsStoraged.length != 0) {
                 const nextTime = formatDistance(
                     new Date(alarmsStoraged[0].dateTimeNotification).getTime(),
                     new Date().getTime(),
@@ -38,14 +39,44 @@ export function MyAlarms() {
 
                 setMyAlarms(alarmsStoraged);
                 setLoading(false);
-
             } else {
+                setLoading(false);
                 setNextMed('Sem alarmes cadastrados')
             }
         }
-
         loadStorageData();
-    }, []);
+
+    }, [myAlarms]);
+
+
+    function handleRemove(alarm: AlarmProps) {
+        Alert.alert('Remover', `Deseja apagar o alarme do medicamento ${alarm.title}?`, [
+            {
+                text: 'Não',
+                style: 'cancel'
+            },
+            {
+                text: 'Sim',
+                onPress: async () => {
+                    try {
+                        await removeAlarm(alarm.key);
+
+                        setMyAlarms((oldData) =>
+                            oldData?.filter((item) => item.key !== alarm.key)
+                        )
+                    } catch (error) {
+                        Alert.alert('Ocorreu um ero na remoção!');
+                    }
+                }
+            }
+        ])
+    }
+
+    if(loading) {
+        return <Text>
+            CARREGANDO...
+        </Text>
+    }
 
     return (
         <Container>
@@ -63,7 +94,9 @@ export function MyAlarms() {
                     data={myAlarms}
                     keyExtractor={(item) => String(item.key)}
                     renderItem={({ item }) => (
-                        <AlarmCard data={item} />
+                        <AlarmCard
+                            data={item}
+                        />
                     )}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ alignItems: 'center' }}
