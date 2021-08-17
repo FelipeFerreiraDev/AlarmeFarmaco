@@ -9,11 +9,20 @@ import { Subtitle } from './styles/Subtitle';
 import Doctor from '../../../assets/Doctor.png';
 import { AntDesign } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/core';
+import { saveAlarm } from '../../libs/storage';
 
 export function Welcome() {
   const navigation = useNavigation();
 
   function handleStart() {
+    saveAlarm({
+      key: '',
+      title: '',
+      time: '',
+      photo: '',
+      dateTimeNotification: new Date(),
+      hour: ''
+    })
     //navigation.navigate('AlarmAdd', {imageUri: 'a'});
     navigation.navigate('MyAlarms');
   }
@@ -21,7 +30,7 @@ export function Welcome() {
   return (
       <Container>
         <Title>
-          Gerencie o horário para tomar seus medicamentos
+          Gestão de Medicamentos
       </Title>
         <Image source={Doctor} style={{ width: '100%', height: '43%', resizeMode: 'contain' }} />
         <Subtitle>

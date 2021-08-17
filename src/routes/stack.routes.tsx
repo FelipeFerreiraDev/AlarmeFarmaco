@@ -4,10 +4,12 @@ import { Welcome } from '../pages/Welcome';
 import { AlarmAdd } from '../pages/AlarmAdd';
 import { CameraScreen } from '../pages/Camera';
 import { MyAlarms } from '../pages/MyAlarms';
+import { AlarmOptions } from '../pages/AlarmOptions';
 
 const stackRoutes = createStackNavigator();
 
 const AppRoutes: React.FC = () => (
+    
     <stackRoutes.Navigator
         headerMode="none"
         screenOptions={{
@@ -34,6 +36,11 @@ const AppRoutes: React.FC = () => (
         <stackRoutes.Screen
             name="Camera"
             component={CameraScreen}
+        />
+
+        <stackRoutes.Screen
+            name="AlarmOptions"
+            component={AlarmOptions}
         />
     </stackRoutes.Navigator>
 )

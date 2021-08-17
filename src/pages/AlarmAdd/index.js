@@ -95,7 +95,7 @@ export function AlarmAdd({ route }) {
   return (
     <Container>
       <Title>
-        Selecione a quantidade de horas
+        Selecionar o intervalo entre as doses
       </Title>
       <ContainerRow >
         <FlatList data={dataHours} renderItem={(item) => (

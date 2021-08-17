@@ -4,22 +4,28 @@ import {
     Image,
     StyleSheet, Text, View
 } from 'react-native';
-import { RectButton, RectButtonProps, TouchableOpacity } from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import { Feather } from '@expo/vector-icons';
-import { SvgFromUri } from 'react-native-svg';
+import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 interface AlarmProps extends RectButtonProps {
     data: {
+        key: string
         title: string;
         photo: string;
         hour: string;
     };
 }
 
-export const AlarmCard = ({ data, ...rest }: AlarmProps) => {
+export const AlarmCard = ({ data }: AlarmProps) => {
+    
+  const navigation = useNavigation();
+
+    function handleOptionAlarm() {
+        navigation.navigate('AlarmOptions', {key: data.key, title: data.title, photo: data.photo});
+    }
+
     return (
-        <RectButton style={styles.container}>
+        <RectButton style={styles.container} onPress={handleOptionAlarm}>
             {data.photo != 'a' ?
                 <Image
                     source={{ uri: data.photo }}
