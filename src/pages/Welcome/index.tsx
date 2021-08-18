@@ -14,16 +14,16 @@ import { saveAlarm } from '../../libs/storage';
 export function Welcome() {
   const navigation = useNavigation();
 
-  function handleStart() {
-    saveAlarm({
+  async function handleStart() {
+    await saveAlarm({
       key: '',
       title: '',
       time: '',
       photo: '',
       dateTimeNotification: new Date(),
+      dosagem: '',
       hour: ''
-    })
-    //navigation.navigate('AlarmAdd', {imageUri: 'a'});
+    });
     navigation.navigate('MyAlarms');
   }
 

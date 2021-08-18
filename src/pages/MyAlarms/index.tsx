@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { View, StyleSheet, Image, FlatList, Text } from 'react-native';
+import { View, StyleSheet, FlatList, Text } from 'react-native';
 import { Container } from './Container';
 
 import { AlarmProps, loadAlarm } from '../../libs/storage';
@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/core';
 export function MyAlarms() {
     const [myAlarms, setMyAlarms] = useState<AlarmProps[]>([]);
     const [loading, setLoading] = useState(true);
-    const [nextMed, setNextMed] = useState<String>();
+    const [nextMed, setNextMed] = useState<String>('Fique atento aos horários dos medicamentos cadastrados!');
 
     const navigation = useNavigation();
 
@@ -24,11 +24,6 @@ export function MyAlarms() {
         async function loadStorageData() {
             const alarmsStoraged = await loadAlarm();
             if (alarmsStoraged.length != 0) {
-
-                setNextMed(
-                    `Fique atento aos horários dos medicamentos cadastrados!`
-                )
-
                 setMyAlarms(alarmsStoraged);
                 setLoading(false);
             } else {

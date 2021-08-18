@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    Animated,
     Image,
     StyleSheet, Text, View
 } from 'react-native';
@@ -12,6 +11,9 @@ interface AlarmProps extends RectButtonProps {
         key: string
         title: string;
         photo: string;
+        time: string;
+        dosagem: string;
+        dateTimeNotification: Date;
         hour: string;
     };
 }
@@ -21,7 +23,14 @@ export const AlarmCard = ({ data }: AlarmProps) => {
   const navigation = useNavigation();
 
     function handleOptionAlarm() {
-        navigation.navigate('AlarmOptions', {key: data.key, title: data.title, photo: data.photo});
+        navigation.navigate('AlarmOptions', {
+            key: data.key, 
+            title: data.title, 
+            photo: data.photo,
+            time: data.time,
+            dosagem: data.dosagem,
+            dateTimeNotification: data.dateTimeNotification
+        });
     }
 
     return (
@@ -40,10 +49,10 @@ export const AlarmCard = ({ data }: AlarmProps) => {
             </Text>
             <View style={styles.details}>
                 <Text style={styles.details}>
-                    Tomar às
+                    Dosagem:
                 </Text>
                 <Text style={styles.timeLabel}>
-                    {data.hour}
+                    {data.dosagem}
                 </Text>
             </View>
         </RectButton>

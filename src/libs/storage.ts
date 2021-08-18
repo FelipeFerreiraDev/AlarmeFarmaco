@@ -8,6 +8,7 @@ export interface AlarmProps {
     title: string;
     photo: string;
     time: string;
+    dosagem: string;
     dateTimeNotification: Date;
     hour: string;
 }
@@ -15,6 +16,7 @@ export interface AlarmProps {
 export interface StorageAlarmProps {
     [key: string]: {
         data: AlarmProps;
+        notificationId: string;
     }
 }
 
@@ -27,14 +29,15 @@ export async function saveAlarm(alarm: AlarmProps): Promise<void> {
 
         nextTime.setDate(now.getDate() * Number(1))
 
-        const seconds = Math.abs(
-            Math.ceil(now.getTime() - nextTime.getTime() / 1000)
-        );
+        const seconds = 
+        Number(nextHourTime)  //hora
+        * 60 //minuto
+        * 60; //segundo
 
         const notificationId = await Notifications.scheduleNotificationAsync({
             content: {
                 title: 'Hora de tomar sua medicação 🙂',
-                body: `Está na hora de tomar a medicação ${alarm.title}`,
+                body: `Está na hora de tomar a medicação ${alarm.title} sua dosagem é ${alarm.dosagem}`,
                 sound: true,
                 priority: Notifications.AndroidNotificationPriority.HIGH,
                 data: {
@@ -42,8 +45,8 @@ export async function saveAlarm(alarm: AlarmProps): Promise<void> {
                 },
             },
             trigger: {
-                seconds: seconds < 60 ? 60 : seconds,
-                repeats: true,
+                seconds: seconds > 3600 ? seconds : 2,
+                repeats: seconds > 3600 ? true : false,
             }
         })
 
@@ -96,6 +99,7 @@ export async function removeAlarm(key: string): Promise<void> {
     const data = await AsyncStorage.getItem('@alarmManager:alarm');
     const alarms = data ? (JSON.parse(data) as StorageAlarmProps) : {};
 
+    await Notifications.cancelScheduledNotificationAsync(alarms[key].notificationId)
     delete alarms[key];
 
     await AsyncStorage.setItem(

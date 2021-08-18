@@ -11,7 +11,7 @@ import { format } from 'date-fns';
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
-import { loadAlarm, saveAlarm } from '../../libs/storage';
+import { saveAlarm } from '../../libs/storage';
 
 export function AlarmAdd({ route }) {
 
@@ -43,26 +43,13 @@ export function AlarmAdd({ route }) {
 
   const [timeSelected, setTimeSelected] = useState('');
   const [selectedDateTime, setSelectedDateTime] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(Platform.OS == 'ios')
 
   const [nameMed, setNameMed] = useState('');
 
+  const [dosagem, setDosagem] = useState('');
+
   function handleTimeSelected(time) {
     setTimeSelected(time);
-  }
-
-  function handleChangeTime(event, dateTime) {
-    if (Platform.OS === 'android') {
-      setShowDatePicker((oldState) => !oldState);
-    }
-
-    if (dateTime) {
-      setSelectedDateTime(dateTime);
-    }
-  }
-
-  function handleOpenDatetimePickerForAndroid() {
-    setShowDatePicker(oldState => !oldState);
   }
 
   function handleStartCamera() {
@@ -80,6 +67,7 @@ export function AlarmAdd({ route }) {
         title: nameMed,
         time: timeSelected,
         photo: imageUri,
+        dosagem: dosagem,
         dateTimeNotification: selectedDateTime,
       });
       navigation.navigate('MyAlarms');
@@ -90,6 +78,10 @@ export function AlarmAdd({ route }) {
 
   function handleInputChange(value) {
     setNameMed(value);
+  }
+
+  function handleInputChangeDosagem(value) {
+    setDosagem(value);
   }
 
   return (
@@ -111,7 +103,7 @@ export function AlarmAdd({ route }) {
         />
       </ContainerRow>
 
-      <KeyboardAvoidingView style={{width: "50%"}}>
+      <KeyboardAvoidingView style={{width: "55%"}}>
         <View style={{borderBottomWidth: 1, alignItems: "center"}}>
           <TextInput 
             placeholder="Nome do medicamento" 
@@ -119,30 +111,14 @@ export function AlarmAdd({ route }) {
             onChangeText={handleInputChange} 
           />
         </View>
-      </KeyboardAvoidingView>
-
-      {
-        showDatePicker && (
-          <DateTimePicker
-            value={selectedDateTime}
-            mode="time"
-            display="spinner"
-            onChange={handleChangeTime}
+        <View style={{marginTop: 20, borderBottomWidth: 1, alignItems: "center", marginBottom: 10}}>
+          <TextInput 
+            placeholder="Dosagem do medicamento" 
+            style={{fontSize: 17}} 
+            onChangeText={handleInputChangeDosagem} 
           />
-        )
-      }
-
-      {
-        Platform.OS === 'android' && (
-          <TouchableOpacity
-            style={styles.dateTimePickerButton}
-            onPress={handleOpenDatetimePickerForAndroid}>
-            <Text style={styles.dateTimePickerText}>
-              {`Mudar ${format(selectedDateTime, 'HH:mm')}`}
-            </Text>
-          </TouchableOpacity>
-        )
-      }
+        </View>
+      </KeyboardAvoidingView>
 
       {
         imageUri && (
@@ -156,7 +132,7 @@ export function AlarmAdd({ route }) {
         style={styles.ButtonContainer}
       >
         <Text style={styles.buttonText}>
-          Abrir Camera
+          Tirar foto do medicamento
             </Text>
         <FontAwesome name="camera-retro" size={24} color="#FFF" />
       </TouchableOpacity>
