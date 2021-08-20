@@ -29,10 +29,7 @@ export async function saveAlarm(alarm: AlarmProps): Promise<void> {
 
         nextTime.setDate(now.getDate() * Number(1))
 
-        const seconds = 
-        Number(nextHourTime)  //hora
-        * 60 //minuto
-        * 60; //segundo
+        const seconds = Number(nextHourTime)  * 60 * 60;
 
         const notificationId = await Notifications.scheduleNotificationAsync({
             content: {
@@ -45,7 +42,7 @@ export async function saveAlarm(alarm: AlarmProps): Promise<void> {
                 },
             },
             trigger: {
-                seconds: seconds > 3600 ? seconds : 2,
+                seconds: seconds,
                 repeats: seconds > 3600 ? true : false,
             }
         })
