@@ -26,7 +26,7 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em seu co
         
         yarn start
 
-            Ou
+    Ou
         
         expo start
         
