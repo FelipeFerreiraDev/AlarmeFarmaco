@@ -22,10 +22,11 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em seu co
      
         npm install
         
-  - Em seguida execute os comandos
+  - Em seguida execute o comando
         
         yarn start
-        yarn android
+            ou
+        expo start
         
   - Leia o QRCode com o aplicativo do expo pelo dispositivo mobile
 
