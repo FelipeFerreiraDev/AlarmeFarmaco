@@ -25,7 +25,9 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em seu co
   - Em seguida execute o comando
         
         yarn start
-            # Ou
+
+            Ou
+        
         expo start
         
   - Leia o QRCode com o aplicativo do expo pelo dispositivo mobile
