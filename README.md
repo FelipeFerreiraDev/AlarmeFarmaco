@@ -50,7 +50,7 @@ perda ou compartilhamento indevido das informações dos usuários, apenas o pr�
 
 O aplicativo foi desenvolvido usando JavaScript, TypeScript e React Native.
 
-Algumas imagens utilizadas foram usadas do site <a href="https://undraw.co/illustrations" >unDraw</a>
+Algumas imagens utilizadas foram retiradas do site <a href="https://undraw.co/illustrations" >unDraw</a>
 
 ## 🛠️ Construído com
 
