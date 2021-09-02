@@ -61,7 +61,7 @@ Algumas imagens utilizadas foram retiradas do site <a href="https://undraw.co/il
 
 ## 📌 Versão
 
-Aida se trata de um protótipo
+Ainda se trata de um protótipo
 
 ## ✒️ Autores
 
