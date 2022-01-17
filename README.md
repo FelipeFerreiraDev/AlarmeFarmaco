@@ -66,6 +66,12 @@ Algumas imagens utilizadas foram retiradas do site <a href="https://undraw.co/il
 
 Ainda se trata de um protótipo
 
+## Link para ver os diplomas
+
+:trophy: <a href="https://github.com/FelipeFerreiraDev/AlarmeFarmaco/blob/main/Certificado%20PIBITI%20-%20Colorido.pdf" >Diploma de apresentação</a>
+
+:trophy: <a href="https://github.com/FelipeFerreiraDev/AlarmeFarmaco/blob/main/FELIPE%20HENRIQUE%20CAMARGOS%20FERREIRA.pdf" >Diploma do desempenho do projeto</a>
+
 ## ✒️ Autores
 
 [<img src="https://avatars.githubusercontent.com/u/48157305?v=4" width=115 > <br> <sub> Felipe Ferreira </sub>](https://github.com/FelipeFerreiraDev) |
