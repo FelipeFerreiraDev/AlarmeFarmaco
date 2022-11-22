@@ -1,4 +1,4 @@
-# 🔗 App Fármaco
+# 🔗 App Farmaco
 
 Desenvolvido durante o Projeto Institucional de Bolsa de Iniciação em Desenvolvimento Técnologico e Inovação (PIBITI), 
 proporcionado pela Universidade Estadual do Norte do Paraná (UENP). O aplicativo tem como principal objetivo auxiliar
